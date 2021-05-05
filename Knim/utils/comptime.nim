@@ -6,8 +6,15 @@ template initialize*(headerName: string, dynlibName: string) =
   elif defined(macosx):
     const libExt = ".dylib"
 
+  when defined(Direct3D11):
+    const
+      libName = dynlibName & "Direct3D11" & libExt
+  elif defined(OpenGL):
+    const
+      libName = dynlibName & "OpenGL" & libExt
+
   when defined(dynamic):
-    {.push dynlib: dynlibName & libExt.}
+    {.push dynlib: libName.}
   elif defined(codegen):
     {.push header: headerName.}
 

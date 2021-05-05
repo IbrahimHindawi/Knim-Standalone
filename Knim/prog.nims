@@ -28,10 +28,6 @@ elif backend == OpenGL:
   echo OpenGL & " backend chosen"
   switch("define", OpenGL)
 
-# var
-#   root = getCurrentDir()
-# echo root
-
 # Check for Deployment Directory
 var deployDir = "Deployment"
 if dirExists(deployDir):
@@ -45,7 +41,7 @@ exec "node Kinc/make.js" & " --graphics " & backend.toLower() #../../
 
 echo "Starting deployment"
 # go to deployment directory
-cd(deployDir)
+
 
 #[
   OPTIONAL: C header include directories
@@ -80,6 +76,8 @@ elif defined(codegen):
 
 echo "-------------------------------"
 
+#cd(root)
 # output directory
 #switch("outdir", "bin")
 switch("outdir", "Deployment")
+cd(deployDir)
