@@ -1,7 +1,51 @@
+import os
+import strutils
+
 mode = ScriptMode.Verbose
 
 echo "-------------------------------"
-echo "executing nimscript"
+echo "Executing nimscript"
+
+#[
+  Choose your backend here:
+    Direct3D11 (Windows)
+    OpenGL (Windows Linux)
+    Metal (wip)
+    Vulkan (wip)
+]#
+
+const
+  Direct3D11 = "Direct3D11"
+  OpenGL = "OpenGL"
+
+const 
+  backend = OpenGL
+
+if backend == Direct3D11:
+  echo Direct3D11 & " backend chosen"
+  switch("define", Direct3D11)
+elif backend == OpenGL:
+  echo OpenGL & " backend chosen"
+  switch("define", OpenGL)
+
+# var
+#   root = getCurrentDir()
+# echo root
+
+# Check for Deployment Directory
+var deployDir = "Deployment"
+if dirExists(deployDir):
+  echo deployDir & " directory found"
+else:
+  mkDir(deployDir)
+  echo deployDir & " directory not found, creating directory."
+
+# run SPIR-V shader compiler and build C project
+exec "node Kinc/make.js" & " --graphics " & backend.toLower() #../../
+
+echo "Starting deployment"
+# go to deployment directory
+cd(deployDir)
 
 #[
   OPTIONAL: C header include directories
@@ -25,8 +69,9 @@ echo "executing nimscript"
 #[
   compile time switching
 ]#
-#switch("define","dynamic")
+switch("define","dynamic")
 #switch("define","codegen")
+
 
 if defined(dynamic):
   echo "building nim against dynamic library..."
@@ -36,4 +81,5 @@ elif defined(codegen):
 echo "-------------------------------"
 
 # output directory
-switch("outdir", "bin")
+#switch("outdir", "bin")
+switch("outdir", "Deployment")
