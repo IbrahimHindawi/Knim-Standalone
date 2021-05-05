@@ -1,22 +1,20 @@
-# nim-init
+# Knim Standalone
 
 ## purpose
-The goal of this project is to streamline Nim integration with C projects<br>
-by using a dynamic library to import C and debug it in VS Code<br>
-then using nim C code-gen to inject it into any C build system.<br>
+This is a module for Knim-Shader Nim project build automation.
 
 ## description
-quick Nim project initialize with VS Code tasks.<br>
-quick to initialize a Nim & C project quickly.<br>
-customize NimScript for different CPUs & OSs.<br>
+Nim scripts for injection into Kinc build systems.<br>
+Visit .vscode & Scripts folder for more information about build tasks.
 
 ## pre-requisites:
-build the dynamic library to run. HINT: look at ```main.c```
+Shaders & DLLs (generated from Kinc)
 
 ## tasks include:
-<li>nim build & run current file with dynamic library</li>
-<li>nim debug current file</li>
-<li>nim code-gen to cache directory</li>
+<li>dynamic library Build & Debug using VS Code LLDB</li>
+<li>codegen C code for IDE injection (Visual Studio, XCode, Android Studio, CodeBlocks)</li>
 
 ## todo:
-<li>bonus: automate gcc to build project using nim's code gen using cmake?</li>
+<li>Modularize Knim into a nimble package</li>
+<li>Create build tasks for Windows Mac Linux Android</li>
+<li>Test on ios</li>
