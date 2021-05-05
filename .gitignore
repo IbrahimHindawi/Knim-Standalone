@@ -1,0 +1,13 @@
+htmldocs/
+
+nimcache/
+nimblecache/
+
+cache/*
+!cache/*.txt
+
+bin/*
+!bin/*.txt
+
+obj/*
+!obj/*.txt

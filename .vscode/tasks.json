@@ -1,0 +1,99 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Nim: Build & Run",
+            "command": "nim",
+            "args": [
+                "Scripts/run.nims"
+            ],
+            "dependsOn": [
+                "Nim: Build"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Nim: Build",
+            "command": "nim",
+            "args": [
+                "Scripts/build.nims"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Nim: Pre-Build Debug",
+            "command": "nim",
+            "args": [
+                "compile",
+                "-g",
+                "-d:dynamic",
+                "-d:OpenGL",
+                "--debugger:native",
+                "SourcesNim/${fileBasename}"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "type": "shell"
+        },
+        {
+            "label": "Nim: Code Gen",
+            "command": "nim",
+            "args": [
+                "compile",
+                "--compileOnly",
+                "--nimcache:cache",
+                "-d:OpenGL",
+                "-d:codegen",
+                "--noMain",
+                "--header:${fileBasename}",
+                "SourcesNim/${fileBasename}"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "label": "Generate Library",
+            "command": "nim",
+            "args": [
+                "Scripts/genlib.nims"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "type": "shell",
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean up",
+            "command": "nim",
+            "args": [
+                "Scripts/clean.nims"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "type": "shell",
+            "problemMatcher": []
+        }
+    ]
+}

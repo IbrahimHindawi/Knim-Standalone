@@ -1,0 +1,1 @@
+int mathOpZero(int input);

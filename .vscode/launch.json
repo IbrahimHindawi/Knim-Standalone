@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Nim: Run Debugger",
+            "preLaunchTask": "Nim: Pre-Build Debug",
+            "program": "bin/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${workspaceRoot}/bin/", //workspaceFolder
+        }
+    ]
+}
