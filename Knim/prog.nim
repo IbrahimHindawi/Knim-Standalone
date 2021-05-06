@@ -10,6 +10,10 @@ import kinc/graphics4/pipeline
 import kinc/system
 import kinc/io/filereader
 
+
+#const path = "C:/Users/Administrator/devel-nim/devel-knim/Knim/Deployment/"
+const path = ""
+
 var 
   vertex_shader: kinc_g4_shader_t
   fragment_shader: kinc_g4_shader_t
@@ -60,8 +64,8 @@ proc nim_start() {.exportc.} =
   kinc_set_update_callback(update)
   
   # DeploymentN Sources
-  load_shader("shader.vert", vertex_shader.addr, KINC_G4_SHADER_TYPE_VERTEX)
-  load_shader("shader.frag", fragment_shader.addr, KINC_G4_SHADER_TYPE_FRAGMENT)
+  load_shader(path&"shader.vert", vertex_shader.addr, KINC_G4_SHADER_TYPE_VERTEX)
+  load_shader(path&"shader.frag", fragment_shader.addr, KINC_G4_SHADER_TYPE_FRAGMENT)
 
   var structure: kinc_g4_vertex_structure_t
   kinc_g4_vertex_structure_init(structure.addr)

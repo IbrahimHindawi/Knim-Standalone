@@ -43,14 +43,6 @@ echo "Starting deployment"
 # go to deployment directory
 
 
-#[
-  OPTIONAL: C header include directories
-  for when running with headers & compiling
-  from c files is needed.
-]# 
-#switch("cincludes","../lib/cSpecOps/mathOps")
-#switch("cincludes","../lib/cSpecOps/logOps")
-
 # codegen compiler operating systems
 #switch("os","android")
 #switch("define","androidNDK")
@@ -63,21 +55,25 @@ echo "Starting deployment"
 #switch("cc","clang")
 
 #[
-  compile time switching
+  build mode switching
 ]#
-switch("define","dynamic")
+#switch("define","dynamic")
 #switch("define","codegen")
 
+# android
+# nim compile --cc:clang --os:android --cpu:arm64 --d:androidNDK --compileOnly --nimcache:Knim-Standalone\cache -d:OpenGL -d:codegen --noMain --header:prog.h Knim-Standalone\Knim\prog.nim
+# ndk {abiFilters "arm64-v8a"}
+
+# windows
+# nim compile --cc:vcc --compileOnly --nimcache:Knim-Standalone\cache -d:OpenGL -d:codegen --noMain --header:prog.h Knim-Standalone\Knim\prog.nim
 
 if defined(dynamic):
-  echo "building nim against dynamic library..."
+  echo "building nim dynamic..."
+  switch("outdir", "Deployment")
+  cd(deployDir)
 elif defined(codegen):
   echo "building nim codegen..."
 
 echo "-------------------------------"
 
-#cd(root)
-# output directory
-#switch("outdir", "bin")
-switch("outdir", "Deployment")
-cd(deployDir)
+
