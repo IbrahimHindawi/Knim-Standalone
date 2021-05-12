@@ -1,3 +1,6 @@
+import ../../utils/comptime
+initialize("kinc/graphics4/textureunit.h","Kinc")
+
 import ../../kincbackends/graphics4/graphics4
 
 type

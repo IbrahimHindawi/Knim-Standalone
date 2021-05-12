@@ -5,6 +5,7 @@ import rendertarget
 import textureunit    
 import vertexstructure
 import shader
+import constantlocation
 
 #const hhkPipe = "kinc/graphics4/pipeline.h"
 #const hhkCLoc = "kinc/graphics4/constantlocation.h"
@@ -70,5 +71,5 @@ type
 proc kinc_g4_pipeline_init*(state: ptr kinc_g4_pipeline_t) {.importc: "kinc_g4_pipeline_init".}
 proc kinc_g4_pipeline_destroy*(state: ptr kinc_g4_pipeline_t) {.importc: "kinc_g4_pipeline_destroy".}
 proc kinc_g4_pipeline_compile*(state: ptr kinc_g4_pipeline_t) {.importc: "kinc_g4_pipeline_compile".}
-#proc kinc_g4_pipeline_get_constant_location*(state: ptr kinc_g4_pipeline_t, name:cstring):Kinc_g4_constant_location {.importc: "kinc_g4_pipeline_get_constant_location".}
-#proc kinc_g4_pipeline_get_texture_unit*(state: ptr kinc_g4_pipeline_t, name:cstring):Kinc_g4_texture_unit {.importc: "kinc_g4_pipeline_get_texture_unit".}
+proc kinc_g4_pipeline_get_constant_location*(state: ptr kinc_g4_pipeline_t, name:cstring):kinc_g4_constant_location_t {.importc: "kinc_g4_pipeline_get_constant_location".}
+proc kinc_g4_pipeline_get_texture_unit*(state: ptr kinc_g4_pipeline_t, name:cstring):kinc_g4_texture_unit_t {.importc: "kinc_g4_pipeline_get_texture_unit".}

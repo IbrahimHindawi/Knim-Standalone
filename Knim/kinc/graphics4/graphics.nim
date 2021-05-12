@@ -1,7 +1,8 @@
 import ../../utils/comptime
 initialize("kinc/graphics4/graphics.h","Kinc")
 
-import pipeline, ../math/matrix, texture, rendertarget, texturearray
+import pipeline, ../math/matrix, texture, rendertarget
+import texturearray, constantlocation, textureunit
 
 #const hhkGraphics = "kinc/graphics4/graphics.h"
 
@@ -87,18 +88,18 @@ proc kinc_g4_set_texture_operation*(operation: kinc_g4_texture_operation_t, arg1
 
 # proc kinc_g4_set_bool*(location: Kinc_g4_constant_location, value: bool) {.importc:"kinc_g4_set_bool".}
 
-# proc kinc_g4_set_matrix3*(location: Kinc_g4_constant_location, value: ptr kinc_matrix3x3_t) {.importc:"kinc_g4_set_matrix3".}
-# proc kinc_g4_set_matrix4*(location: Kinc_g4_constant_location, value: ptr kinc_matrix4x4_t) {.importc:"kinc_g4_set_matrix4".}
+proc kinc_g4_set_matrix3*(location: kinc_g4_constant_location_t, value: ptr kinc_matrix3x3_t) {.importc:"kinc_g4_set_matrix3".}
+proc kinc_g4_set_matrix4*(location: kinc_g4_constant_location_t, value: ptr kinc_matrix4x4_t) {.importc:"kinc_g4_set_matrix4".}
 
-# proc kinc_g4_set_texture_magnification_filter*(unit: Kinc_g4_texture_unit, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture_magnification_filter".}
+# proc kinc_g4_set_texture_magnification_filter*(unit: kinc_g4_texture_unit_t, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture_magnification_filter".}
 
-# proc kinc_g4_set_texture3d_magnification_filter*(texunit: Kinc_g4_texture_unit, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture3d_magnification_filter".}
-# proc kinc_g4_set_texture_minification_filter*(unit: Kinc_g4_texture_unit, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture_minification_filter".}
-# proc kinc_g4_set_texture3d_minification_filter*(texunit: Kinc_g4_texture_unit, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture3d_minification_filter".}
-# proc kinc_g4_set_texture_mipmap_filter*(unit: Kinc_g4_texture_unit, filter: kinc_g4_mipmap_filter_t) {.importc:"kinc_g4_set_texture_mipmap_filter".}
-# proc kinc_g4_set_texture3d_mipmap_filter*(texunit: Kinc_g4_texture_unit, filter: kinc_g4_mipmap_filter_t) {.importc:"kinc_g4_set_texture3d_mipmap_filter".}
-# proc kinc_g4_set_texture_compare_mode*(unit: Kinc_g4_texture_unit, enabled: bool) {.importc:"kinc_g4_set_texture_compare_mode".}
-# proc kinc_g4_set_cubemap_compare_mode*(unit: Kinc_g4_texture_unit, enabled: bool) {.importc:"kinc_g4_set_cubemap_compare_mode".}
+# proc kinc_g4_set_texture3d_magnification_filter*(texunit: kinc_g4_texture_unit_t, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture3d_magnification_filter".}
+# proc kinc_g4_set_texture_minification_filter*(unit: kinc_g4_texture_unit_t, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture_minification_filter".}
+# proc kinc_g4_set_texture3d_minification_filter*(texunit: kinc_g4_texture_unit_t, filter: kinc_g4_texture_filter_t) {.importc:"kinc_g4_set_texture3d_minification_filter".}
+# proc kinc_g4_set_texture_mipmap_filter*(unit: kinc_g4_texture_unit_t, filter: kinc_g4_mipmap_filter_t) {.importc:"kinc_g4_set_texture_mipmap_filter".}
+# proc kinc_g4_set_texture3d_mipmap_filter*(texunit: kinc_g4_texture_unit_t, filter: kinc_g4_mipmap_filter_t) {.importc:"kinc_g4_set_texture3d_mipmap_filter".}
+# proc kinc_g4_set_texture_compare_mode*(unit: kinc_g4_texture_unit_t, enabled: bool) {.importc:"kinc_g4_set_texture_compare_mode".}
+# proc kinc_g4_set_cubemap_compare_mode*(unit: kinc_g4_texture_unit_t, enabled: bool) {.importc:"kinc_g4_set_cubemap_compare_mode".}
 
 proc kinc_g4_render_targets_inverted_y*():bool {.importc: "kinc_g4_render_targets_inverted_y".}
 
@@ -110,8 +111,8 @@ proc kinc_g4_set_render_targets*(targets: ptr ptr kinc_g4_render_target_t, count
 
 proc kinc_g4_set_render_target_face*(texture: ptr kinc_g4_render_target_t, face: cint) {.importc:"kinc_g4_set_render_target_face".}
 
-# proc kinc_g4_set_texture*(unit: Kinc_g4_texture_unit, texture: ptr Kinc_g4_texture) {.importc:"kinc_g4_set_texture".}
-# proc kinc_g4_set_image_texture*(unit: Kinc_g4_texture_unit, texture: ptr Kinc_g4_texture) {.importc:"kinc_g4_set_image_texture".}
+proc kinc_g4_set_texture*(unit: kinc_g4_texture_unit_t, texture: ptr kinc_g4_texture_t) {.importc:"kinc_g4_set_texture".}
+# proc kinc_g4_set_image_texture*(unit: kinc_g4_texture_unit_t, texture: ptr kinc_g4_texture_t) {.importc:"kinc_g4_set_image_texture".}
 
 proc kinc_g4_init_occlusion_query*(occlusionQuery: ptr cuint):bool {.importc:"kinc_g4_init_occlusion_query".}
 
@@ -125,7 +126,7 @@ proc kinc_g4_are_query_results_available*(occlusionQuery: cuint):bool {.importc:
 
 proc kinc_g4_get_query_results*(occlusionQuery: cuint, pixelCount:ptr cuint) {.importc:"kinc_g4_get_query_results".}
 
-# proc kinc_g4_set_texture_array*(unit: Kinc_g4_texture_unit, array: ptr Kinc_g4_texture_array) {.importc:"kinc_g4_set_texture_array".}
+# proc kinc_g4_set_texture_array*(unit: kinc_g4_texture_unit_t, array: ptr Kinc_g4_texture_array) {.importc:"kinc_g4_set_texture_array".}
 
 proc kinc_g4_antialiasing_samples*():cint {.importc:"kinc_g4_antialiasing_samples".}
 

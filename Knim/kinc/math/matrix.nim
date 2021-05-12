@@ -2,10 +2,11 @@ import ../../utils/comptime
 initialize("kinc/math/matrix.h","Kinc")
 
 type
-    kinc_matrix3x3_t* {.importc:"kinc_matrix3x3_t".} = object
-        m*: array[3 * 3, cfloat]
-    kinc_matrix4x4_t* {.importc:"kinc_matrix4x4_t".} = object
-        m*: array[4 * 4, cfloat]
+  kinc_matrix3x3_t* {.bycopy.} = object
+    m*: array[3 * 3, cfloat]
+
+  kinc_matrix4x4_t* {.bycopy.}  = object
+    m*: array[4 * 4, cfloat]
 
 proc kinc_matrix3x3_get*(matrix: ptr kinc_matrix3x3_t, x: cint, y: cint):cfloat
     {.importc: "kinc_matrix3x3_get".}
