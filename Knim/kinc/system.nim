@@ -3,7 +3,7 @@ initialize("kinc/system.h","Kinc")
 
 import window
 
-proc init*(name: cstring; width: cint; height: cint; win: ptr kinc_window_options_t;
+proc kinc_init*(name: cstring; width: cint; height: cint; win: ptr kinc_window_options_t;
                 frame: ptr kinc_framebuffer_options_t): cint {.importc: "kinc_init",
     .}
 proc kinc_application_name*(): cstring {.importc: "kinc_application_name",
