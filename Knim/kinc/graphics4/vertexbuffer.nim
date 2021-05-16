@@ -4,24 +4,56 @@ initialize("kinc/graphics4/vertexbuffer.h","Kinc")
 import vertexstructure
 import ../../kincbackends/graphics4/graphics4
 
+withMode("kinc_g4_vertex_buffer_t"):
+  type
+    VertexBuffer* = object
+      impl*: kinc_g4_vertex_buffer_impl_t
 
-type
-  kinc_g4_vertex_buffer_t* {.bycopy.} = object
-    impl*: kinc_g4_vertex_buffer_impl_t
+# when defined(dynamic): 
+#   {.push bycopy.}
+# elif defined(codegen): 
+#   {.push importc:"kinc_g4_vertex_buffer_t",bycopy.}
+# type
+#   vertexBuffer* {.bycopy.} = object
+#     impl*: kinc_g4_vertex_buffer_impl_t
+# {.pop.}
 
-  kinc_g4_usage_t* {.size: sizeof(cint).} = enum
-    KINC_G4_USAGE_STATIC, KINC_G4_USAGE_DYNAMIC, KINC_G4_USAGE_READABLE
+withMode("kinc_g4_usage_t"):
+  type
+    Usage* {.size: sizeof(cint).} = enum
+      uStatic, uDynamic, uReadable
 
 
-proc kinc_g4_vertex_buffer_init*(buffer: ptr kinc_g4_vertex_buffer_t; count: cint;structure: ptr kinc_g4_vertex_structure_t;
-                                usage: kinc_g4_usage_t;instance_data_step_rate: cint) {.importc: "kinc_g4_vertex_buffer_init".}
-proc kinc_g4_vertex_buffer_destroy*(buffer: ptr kinc_g4_vertex_buffer_t) {.importc: "kinc_g4_vertex_buffer_destroy".}
-proc kinc_g4_vertex_buffer_lock_all*(buffer: ptr kinc_g4_vertex_buffer_t): ptr cfloat {.importc: "kinc_g4_vertex_buffer_lock_all".}
-proc kinc_g4_vertex_buffer_lock*(buffer: ptr kinc_g4_vertex_buffer_t; start: cint;count: cint): ptr cfloat {.importc: "kinc_g4_vertex_buffer_lock".}
-proc kinc_g4_vertex_buffer_unlock_all*(buffer: ptr kinc_g4_vertex_buffer_t) {.importc: "kinc_g4_vertex_buffer_unlock_all".}
-proc kinc_g4_vertex_buffer_unlock*(buffer: ptr kinc_g4_vertex_buffer_t; count: cint) {.importc: "kinc_g4_vertex_buffer_unlock".}
-proc kinc_g4_vertex_buffer_count*(buffer: ptr kinc_g4_vertex_buffer_t): cint {.importc: "kinc_g4_vertex_buffer_count".}
-proc kinc_g4_vertex_buffer_stride*(buffer: ptr kinc_g4_vertex_buffer_t): cint {.importc: "kinc_g4_vertex_buffer_stride".}
-proc kinc_internal_g4_vertex_buffer_set*(buffer: ptr kinc_g4_vertex_buffer_t; offset: cint): cint {.importc: "kinc_internal_g4_vertex_buffer_set".}
-proc kinc_g4_set_vertex_buffers*(buffers: ptr ptr kinc_g4_vertex_buffer_t; count: cint) {.importc: "kinc_g4_set_vertex_buffers".}
-proc kinc_g4_set_vertex_buffer*(buffer: ptr kinc_g4_vertex_buffer_t) {.importc: "kinc_g4_set_vertex_buffer".}
+proc initVertexBuffer*(buffer: ptr VertexBuffer; count: cint;structure: ptr VertexStructure;usage: Usage;instance_data_step_rate: cint) 
+  {.importc: "kinc_g4_vertex_buffer_init".}
+
+proc vertexBufferDestroy*(buffer: ptr VertexBuffer) 
+  {.importc: "kinc_g4_vertex_buffer_destroy".}
+
+proc vertexBufferLockAll*(buffer: ptr VertexBuffer): ptr cfloat 
+  {.importc: "kinc_g4_vertex_buffer_lock_all".}
+
+proc vertexBufferLock*(buffer: ptr VertexBuffer; start: cint;count: cint): ptr cfloat 
+  {.importc: "kinc_g4_vertex_buffer_lock".}
+
+proc vertexBufferUnlockAll*(buffer: ptr VertexBuffer) 
+  {.importc: "kinc_g4_vertex_buffer_unlock_all".}
+
+proc vertexBufferUnlock*(buffer: ptr VertexBuffer; count: cint) 
+  {.importc: "kinc_g4_vertex_buffer_unlock".}
+
+proc vertexBufferCount*(buffer: ptr VertexBuffer): cint 
+  {.importc: "kinc_g4_vertex_buffer_count".}
+
+proc vertexBufferStride*(buffer: ptr VertexBuffer): cint 
+  {.importc: "kinc_g4_vertex_buffer_stride".}
+
+proc internalVertexBufferSet*(buffer: ptr VertexBuffer; offset: cint): cint 
+  {.importc: "kinc_internal_g4_vertex_buffer_set".}
+
+proc setVertexBuffers*(buffers: ptr ptr VertexBuffer; count: cint) 
+  {.importc: "kinc_g4_set_vertex_buffers".}
+
+proc setVertexBuffer*(buffer: ptr VertexBuffer) 
+  {.importc: "kinc_g4_set_vertex_buffer".}
+

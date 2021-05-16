@@ -35,18 +35,18 @@ type
     KINC_G4_MIPMAP_FILTER_POINT, 
     KINC_G4_MIPMAP_FILTER_LINEAR ##  linear texture filter + linear mip filter -> trilinear filter
 
-let kinc_g4_clear_color*:uint = 1
-let kinc_g4_clear_depth*:uint = 2
-let kinc_g4_clear_stencil*:uint = 4
+let ClearColor*:uint = 1
+let ClearDepth*:uint = 2
+let ClearStencil*:uint = 4
 
-proc kinc_g4_init*(window:cint, depthBufferBits: cint, stencilBufferBits: cint, vSync: bool) {.importc:"kinc_g4_init".}
-proc kinc_g4_destroy*(window:cint) {.importc:"kinc_g4_destroy".}
-proc kinc_g4_flush*() {.importc:"kinc_g4_flush".}
-proc kinc_g4_begin*(window:cint) {.importc:"kinc_g4_begin".}
-proc kinc_g4_end*(window:cint) {.importc:"kinc_g4_end".}
-proc kinc_g4_swap_buffers*():bool    {.importc:"kinc_g4_swap_buffers".}
+proc initG4*(window:cint, depthBufferBits: cint, stencilBufferBits: cint, vSync: bool) {.importc:"kinc_g4_init".}
+proc g4Destroy*(window:cint) {.importc:"kinc_g4_destroy".}
+proc g4Flush*() {.importc:"kinc_g4_flush".}
+proc g4Begin*(window:cint) {.importc:"kinc_g4_begin".}
+proc g4End*(window:cint) {.importc:"kinc_g4_end".}
+proc g4SwapBuffers*():bool    {.importc:"kinc_g4_swap_buffers".}
 
-proc kinc_g4_clear*(flags:cuint, color: cuint, depth: cfloat, stencil: cint) {.importc:"kinc_g4_clear".}
+proc g4Clear*(flags:cuint, color: cuint, depth: cfloat, stencil: cint) {.importc:"kinc_g4_clear".}
 
 proc kinc_g4_viewport*(x:cint, y: cint, width:cint, height:cint) {.importc:"kinc_g4_viewport".}
 
@@ -54,7 +54,7 @@ proc kinc_g4_scissor*(x:cint, y: cint, width:cint, height:cint) {.importc:"kinc_
 
 proc kinc_g4_disable_scissor*() {.importc:"kinc_g4_disable_scissor".}
 
-proc kinc_g4_draw_indexed_vertices*() {.importc:"kinc_g4_draw_indexed_vertices".}
+proc g4DrawIndexedVertices*() {.importc:"kinc_g4_draw_indexed_vertices".}
 
 proc kinc_g4_draw_indexed_vertices_from_to*(start: cint, count: cint) {.importc:"kinc_g4_draw_indexed_vertices_from_to".}
 
@@ -68,7 +68,7 @@ proc kinc_g4_draw_indexed_vertices_instanced_from_to*(instanceCount: cint, start
 
 #proc kinc_g4_set_texture3d_addressing*(unit: kinc_g4_texture_unit_t, dir: kinc_g4_texture_direction_t, addressing: kinc_g4_texture_addressing_t) {.importc:"kinc_g4_set_texture3d_addressing".}
 
-proc kinc_g4_set_pipeline*(pipeline: ptr kinc_g4_pipeline_t) {.importc:"kinc_g4_set_pipeline".}
+proc setPipeline*(pipeline: ptr Pipeline) {.importc:"kinc_g4_set_pipeline".}
 
 proc kinc_g4_set_stencil_reference_value*(value: cint) {.importc:"kinc_g4_set_stencil_reference_value".}
 

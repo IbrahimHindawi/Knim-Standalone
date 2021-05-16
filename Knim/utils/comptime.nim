@@ -18,3 +18,11 @@ template initialize*(headerName: string, dynlibName: string) =
   elif defined(codegen):
     {.push header: headerName.}
 
+template withMode*(cName: string, body: untyped) =
+  when defined(dynamic): 
+    {.push bycopy.}
+  elif defined(codegen): 
+    {.push importc:cName, bycopy.}
+  body
+  {.pop.}
+  
