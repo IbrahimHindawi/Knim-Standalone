@@ -1,7 +1,8 @@
 # Knim Standalone
 
 ## purpose
-This is a module for Knim-Shader Nim project build automation.
+This is a module for Knim-Shader Nim project build automation.<br>
+The structure of this project is based on: [nim-init](https://github.com/IbrahimHindawi/nim-init)
 
 ## description
 Nim scripts for injection into Kinc build systems.<br>
