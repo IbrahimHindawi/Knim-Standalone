@@ -5,6 +5,7 @@ initialize("kinc/color.h","Kinc")
 proc colorComponents*(color: cuint; red: ptr cfloat; green: ptr cfloat;
   blue: ptr cfloat; alpha: ptr cfloat) {.importc:"kinc_color_components".}  
 const
+  ## AARRGGBB
   ColorBlack* = 0xFF000000
   ColorWhite* = 0xFFFFFFFF
   ColorRed* = 0xFFFF0000
